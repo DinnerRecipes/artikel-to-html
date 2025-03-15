@@ -23,7 +23,7 @@
             let text = document.getElementById("inputText").value;
             let lines = text.split("\n");
             let htmlOutput = "";
-            let adScript = `
+            let adScript1 = `
                 <script type="text/javascript">
                     atOptions = {
                         'key' : 'a317173734fbcd8901b885b17a227f72',
@@ -35,15 +35,49 @@
                 <\/script>
                 <script type="text/javascript" src="//roastwearwritten.com/a317173734fbcd8901b885b17a227f72/invoke.js"><\/script>
             `;
-            let insertedAd = false;
+            let adScript2 = `
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '5dc2d59b5b62257cf3c724656995eed2',
+                        'format' : 'iframe',
+                        'height' : 50,
+                        'width' : 320,
+                        'params' : {}
+                    };
+                <\/script>
+                <script type="text/javascript" src="//roastwearwritten.com/5dc2d59b5b62257cf3c724656995eed2/invoke.js"><\/script>
+            `;
+            let adScript3 = `
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '392fbd37fc20834e2ea77f031022ab0b',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                <\/script>
+                <script type="text/javascript" src="//roastwearwritten.com/392fbd37fc20834e2ea77f031022ab0b/invoke.js"><\/script>
+            `;
+            let insertedAd1 = false;
+            let insertedAd2 = false;
+            let insertedAd3 = false;
+            let h2Count = 0;
             
             lines.forEach(line => {
                 if (/^\*\*(.+)\*\*$/.test(line)) {
                     htmlOutput += `<h1>${line.replace(/^\*\*(.+)\*\*$/, '$1')}</h1>\n`;
-                } else if (/^## \*\*(.+)\*\*$/.test(line)) {
-                    if (!insertedAd) {
-                        htmlOutput += adScript; 
-                        insertedAd = true;
+                } else if (/^## \*\*(.+)\*\*?$/.test(line)) {
+                    h2Count++;
+                    if (!insertedAd1) {
+                        htmlOutput += adScript1; 
+                        insertedAd1 = true;
+                    } else if (h2Count === 3 && !insertedAd2) {
+                        htmlOutput += adScript2;
+                        insertedAd2 = true;
+                    } else if (h2Count === 5 && !insertedAd3) {
+                        htmlOutput += adScript3;
+                        insertedAd3 = true;
                     }
                     htmlOutput += `<h2>${line.replace(/^## \*\*(.+)\*\*$/, '$1')}</h2>\n`;
                 } else if (/^### \*\*(.+)\*\*$/.test(line)) {
