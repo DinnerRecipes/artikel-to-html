@@ -63,6 +63,22 @@
                 <\/script>
                 <script type="text/javascript" src="//roastwearwritten.com/392fbd37fc20834e2ea77f031022ab0b/invoke.js"><\/script>
             `;
+             let adScript4 = `
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '32417884c3de3b64cea14b0307a6b0c1',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                <\/script>
+                <script type="text/javascript" src="//roastwearwritten.com/32417884c3de3b64cea14b0307a6b0c1/invoke.js"><\/script>
+            ;
+            let adScript5 = `
+                <script async="async" data-cfasync="false" src="//roastwearwritten.com/6683f4839a05cff47fc63acd1bd5b87e/invoke.js"></script>
+                <div id="container-6683f4839a05cff47fc63acd1bd5b87e"></div>
+            ;
             let insertedAd1 = false;
             let insertedAd2 = false;
             let insertedAd3 = false;
@@ -107,21 +123,11 @@
                 </head>
                 <body>
                     <div class='container'>
-                    <center>&lt;script type=&quot;text/javascript&quot;&gt;
-                    	atOptions = {
-                    		&#039;key&#039; : &#039;32417884c3de3b64cea14b0307a6b0c1&#039;,
-                    		&#039;format&#039; : &#039;iframe&#039;,
-                    		&#039;height&#039; : 250,
-                    		&#039;width&#039; : 300,
-                    		&#039;params&#039; : {}
-                    	};
-                    &lt;/script&gt;
-                    &lt;script type=&quot;text/javascript&quot; src=&quot;//roastwearwritten.com/32417884c3de3b64cea14b0307a6b0c1/invoke.js&quot;&gt;&lt;/script&gt;</center>
+                        ${adScript4}
                         ${h1Content}
                         ${imageElement}
                         ${htmlOutput}
-                    <center>&lt;script async=&quot;async&quot; data-cfasync=&quot;false&quot; src=&quot;//roastwearwritten.com/6683f4839a05cff47fc63acd1bd5b87e/invoke.js&quot;&gt;&lt;/script&gt;
-                &lt;div id=&quot;container-6683f4839a05cff47fc63acd1bd5b87e&quot;&gt;&lt;/div&gt;</center>
+                        ${adScript5}
                     </div>
                 </body>
                 </html>`;
