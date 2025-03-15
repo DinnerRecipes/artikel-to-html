@@ -6,13 +6,15 @@
     <title>Article to HTML Converter</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        textarea, pre { width: 100%; height: 200px; margin-bottom: 10px; }
+        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+        pre, input { width: 100%; margin-bottom: 10px; }
         button { padding: 10px; margin-right: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
     <h1>Article to HTML Converter</h1>
     <textarea id="inputText" placeholder="Masukkan artikel di sini..."></textarea>
+    <input type="text" id="imageLink" placeholder="Masukkan link gambar di sini...">
     <br>
     <button onclick="convertToHTML()">Convert</button>
     <button onclick="copyOutput()">Copy Output</button>
@@ -21,8 +23,10 @@
     <script>
         function convertToHTML() {
             let text = document.getElementById("inputText").value;
+            let imageUrl = document.getElementById("imageLink").value;
             let lines = text.split("\n");
             let htmlOutput = "";
+            let h1Content = "";
             let adScript1 = `
                 <script type="text/javascript">
                     atOptions = {
@@ -66,7 +70,7 @@
             
             lines.forEach(line => {
                 if (/^\*\*(.+)\*\*$/.test(line)) {
-                    htmlOutput += `<h1>${line.replace(/^\*\*(.+)\*\*$/, '$1')}</h1>\n`;
+                    h1Content = `<h1 style='text-align:center;'>${line.replace(/^\*\*(.+)\*\*$/, '$1')}</h1>\n`;
                 } else if (/^## \*\*(.+)\*\*?$/.test(line)) {
                     h2Count++;
                     if (!insertedAd1) {
@@ -91,6 +95,8 @@
                 }
             });
             
+            let imageElement = imageUrl ? `<div style='text-align:center;'><img src='${imageUrl}' style='width:100%; max-width:800px; height:auto; aspect-ratio:16/9; object-fit:cover;'></div>\n` : "";
+            
             let finalOutput = `<!DOCTYPE html>
                 <html lang='en'>
                 <head>
@@ -101,7 +107,21 @@
                 </head>
                 <body>
                     <div class='container'>
+                    <center><script type="text/javascript">
+                    	atOptions = {
+                    		'key' : '32417884c3de3b64cea14b0307a6b0c1',
+                    		'format' : 'iframe',
+                    		'height' : 250,
+                    		'width' : 300,
+                    		'params' : {}
+                    	};
+                    </script>
+                    <script type="text/javascript" src="//roastwearwritten.com/32417884c3de3b64cea14b0307a6b0c1/invoke.js"></script></center>
+                        ${h1Content}
+                        ${imageElement}
                         ${htmlOutput}
+                    <center><script async="async" data-cfasync="false" src="//roastwearwritten.com/6683f4839a05cff47fc63acd1bd5b87e/invoke.js"></script>
+                <div id="container-6683f4839a05cff47fc63acd1bd5b87e"></div></center>
                     </div>
                 </body>
                 </html>`;
